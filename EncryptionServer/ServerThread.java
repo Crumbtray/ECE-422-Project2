@@ -1,17 +1,14 @@
 import java.net.*;
-import java.util.*;
 import java.io.*;
 
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
-	private HashMap Users = null;
 	
-	public ServerThread(Socket socket, HashMap users)
+	public ServerThread(Socket socket)
 	{
 		super("ServerThread");
 		this.socket = socket;
-		this.Users = users;
 		System.out.println("Thread created.");
 	}
 	
@@ -33,7 +30,6 @@ public class ServerThread extends Thread {
 			
 			while((inputRequest = (Request) ois.readObject()) != null)
 			{
-				System.out.println("Processing input...");
 				String decryptedInput = new String(TeaCryptoManager.Decrypt(inputRequest.buffer));
 				
 				if(decryptedInput.equals("Finish"))
