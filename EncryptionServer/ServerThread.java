@@ -18,27 +18,28 @@ public class ServerThread extends Thread {
 	public void run() {
 		try {
 			System.out.println("Starting thread....");
-			InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
-			BufferedReader in = new BufferedReader(inputStreamReader);
+			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 			OutputStream outputStream = socket.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(outputStream);
 			
 			System.out.println("Done initializing streams.");
 			
-			String inputLine;
+			Request inputRequest;
 			TestObject outputObject;
 			FileServer fileServer = new FileServer();
 			System.out.println("Done initializing FileServer.");
 			
-			while((inputLine = in.readLine()) != null)
+			while((inputRequest = (Request) ois.readObject()) != null)
 			{
 				System.out.println("Processing input...");
-				if(inputLine.equals("Finish"))
+				String decryptedInput = new String(TeaCryptoManager.Decrypt(inputRequest.buffer));
+				
+				if(decryptedInput.equals("Finish"))
 				{
 					break;
 				}
 				
-				outputObject = fileServer.processInput(inputLine);
+				outputObject = fileServer.processInput(decryptedInput);
 				oos.writeObject(outputObject);
 			}
 						
