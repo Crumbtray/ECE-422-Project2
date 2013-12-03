@@ -4,9 +4,9 @@ import java.net.*;
 public class Client {
 	public static void main(String[] args)
 	{
-		if(args.length != 2)
+		if(args.length != 1)
 		{
-			System.err.println("Usage: java Client <host name> <userName>");
+			System.err.println("Usage: java Client <host name>");
 			System.exit(1);
 		}
 		String hostName = args[0];
@@ -23,17 +23,17 @@ public class Client {
 			Response fromServer;
 			String fromUser;
 			
-			while((fromUser = stdIn.readLine()) != null)
+			while((fromServer = (Response) objectInputStream.readObject()) != null)
 			{
-				System.out.println("Client: " + fromUser);
-				// Encrypt the damn thing:
-				byte[] encryptedMessage = TeaCryptoManager.Encrypt(fromUser.getBytes());				
-				oos.writeObject(new Request(encryptedMessage));
-				
-				fromServer = (Response) objectInputStream.readObject();
-				if(fromServer != null)
+				System.out.println("Received Object: " + fromServer.getMessage());
+							
+				fromUser = stdIn.readLine();
+				if(fromUser != null)
 				{
-					System.out.println("Received Object: " + fromServer.getMessage());
+					// Encrypt the damn thing:
+					byte[] encryptedMessage = TeaCryptoManager.Encrypt(fromUser.getBytes());				
+					oos.writeObject(new Request(encryptedMessage));
+					System.out.println("Client: " + fromUser);
 				}
 			}
 		}

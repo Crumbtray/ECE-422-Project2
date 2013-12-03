@@ -28,6 +28,8 @@ public class ServerThread extends Thread {
 			Response outputObject;
 			FileServer fileServer = new FileServer();
 			System.out.println("Done initializing FileServer.");
+			outputObject = fileServer.initialize();
+			oos.writeObject(outputObject);
 			
 			while((inputRequest = (Request) ois.readObject()) != null)
 			{
