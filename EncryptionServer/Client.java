@@ -20,7 +20,7 @@ public class Client {
 			ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 			
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-			TestObject fromServer;
+			Response fromServer;
 			String fromUser;
 			
 			while((fromUser = stdIn.readLine()) != null)
@@ -30,7 +30,7 @@ public class Client {
 				byte[] encryptedMessage = TeaCryptoManager.Encrypt(fromUser.getBytes());				
 				oos.writeObject(new Request(encryptedMessage));
 				
-				fromServer = (TestObject) objectInputStream.readObject();
+				fromServer = (Response) objectInputStream.readObject();
 				if(fromServer != null)
 				{
 					System.out.println("Received Object: " + fromServer.getMessage());

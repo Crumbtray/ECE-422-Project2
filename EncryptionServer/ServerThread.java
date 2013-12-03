@@ -25,7 +25,7 @@ public class ServerThread extends Thread {
 			System.out.println("Done initializing streams.");
 			
 			Request inputRequest;
-			TestObject outputObject;
+			Response outputObject;
 			FileServer fileServer = new FileServer();
 			System.out.println("Done initializing FileServer.");
 			
