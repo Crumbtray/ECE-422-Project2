@@ -48,10 +48,7 @@ public class ServerThread extends Thread {
 					}
 					else
 					{
-						String response = "Exit";
-						outputObject = new Response(cryptoManager.Encrypt(response.getBytes()));
-						oos.writeObject(outputObject);
-						oos.flush();
+						break;
 					}
 				}
 				else
@@ -88,12 +85,7 @@ public class ServerThread extends Thread {
 			System.out.println("Username: " + username);
 			String possiblePassword = this.Users.get(username);
 			System.out.println("Value: " + value + ", " + possiblePassword);
-			if(possiblePassword == null)
-			{
-				System.out.println("Unauthorized Login Attempt.");
-				return false;
-			}
-			else
+			if(possiblePassword != null)
 			{
 				this.User = username;
 				this.cryptoManager = decryptor;
