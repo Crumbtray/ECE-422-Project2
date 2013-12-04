@@ -11,12 +11,12 @@
  */
 JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeEncrypt(JNIEnv *env, jobject thisObj, jintArray values, jintArray keys)
 {
-	jint *v = env->GetIntArrayElements(values, NULL);
-	jint *k = env->GetIntArrayElements(keys, NULL);
+	jint *v = (jint *)(*env)->GetIntArrayElements(values, NULL);
+	jint *k = (jint *)(*env)->GetIntArrayElements(keys, NULL);
 
-	uint32_t v0=(unit32_t)v[0], v1=(unit32_t)v[1], sum=0, i;           /* set up */
+	uint32_t v0=(uint32_t)v[0], v1=(uint32_t)v[1], sum=0, i;           /* set up */
     uint32_t delta=0x9e3779b9;                     /* a key schedule constant */
-    uint32_t k0=(unit32_t)k[0], k1=(unit32_t)k[1], k2=(unit32_t)k[2], k3=(unit32_t)k[3];   /* cache key */
+    uint32_t k0=(uint32_t)k[0], k1=(uint32_t)k[1], k2=(uint32_t)k[2], k3=(uint32_t)k[3];   /* cache key */
     for (i=0; i < 32; i++) {                       /* basic cycle start */
         sum += delta;
         v0 += ((v1<<4) + k0) ^ (v1 + sum) ^ ((v1>>5) + k1);
