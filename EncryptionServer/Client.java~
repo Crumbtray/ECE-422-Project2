@@ -41,8 +41,6 @@ public class Client {
 				else if(decryptedMessage.equals("OK"))
 				{
 					System.out.println("Successfully connected.");
-					System.out.println("To Get a File: get <filename>");
-					System.out.println("To Exit: \"exit \"");
 				}
 				else if(decryptedMessage.equals("NOTFOUND"))
 				{

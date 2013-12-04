@@ -11,7 +11,11 @@ public class FileServer {
 	
 	public Response processInput(String input)
 	{
-		String returnString = input;	
+		String returnString = input;
+		System.out.println(input.equals("exit");
+		System.out.println(input.equals("exit ");
+		System.out.println(input.equals("Exit ");		
+		System.out.println(input.equals("Exit ");		
 
 		String[] commands = input.split(" ");
 
