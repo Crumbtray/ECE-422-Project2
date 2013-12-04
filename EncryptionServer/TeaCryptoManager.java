@@ -7,7 +7,7 @@ public class TeaCryptoManager {
 	
 	public TeaCryptoManager(byte[] key)
 	{
-		System.load("TeaCryptoManager");
+		System.loadLibrary("TeaCryptoManager");
 		// Convert the key into a 128-bit integer key.
 		this.key = new int[4];
 		try {
