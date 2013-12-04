@@ -23,6 +23,9 @@ JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeEncrypt(JNIEnv *env, jobject 
         v1 += ((v0<<4) + k2) ^ (v0 + sum) ^ ((v0>>5) + k3);  
     }                                              /* end cycle */
     v[0]=v0; v[1]=v1;
+
+    (*env)->ReleaseIntArrayElements(env, values, v, NULL);
+    (*env)->ReleaseIntArrayElements(env, keys, k, NULL);
 }
 
 /*

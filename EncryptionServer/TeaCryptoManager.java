@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.security.*;
 
 public class TeaCryptoManager {
@@ -24,7 +25,38 @@ public class TeaCryptoManager {
 	
 	public byte[] Encrypt(byte[] input)
 	{
-		return input;
+		// Pad input into array P, a multiple of 4
+		int size = (input.length / 4) + (input.length % 4);
+		byte[] p = new byte[size *4];
+		ByteBuffer bb = ByteBuffer.wrap(p);
+		bb.put(input);
+
+		// Take P, and store it in an Int Array
+		int[] buf = new int[size];
+		IntBuffer ib = ByteBuffer.wrap(p).asIntBuffer();
+		for (int i = 0; i < buf.length; i++)
+		{
+			buf[i] = ib.get();
+		}
+		
+		// Cycling two Ints in the array, encipher.
+		int[] ciphertext = new int[2];
+		int[] fullCiphertext = new int[buf.length];
+		IntBuffer ib2 = IntBuffer.wrap(fullCiphertext);
+		
+		for (int i = 0; i < buf.length; i+=2)
+		{
+			ciphertext[0] = buf[i];
+			ciphertext[1] = buf[i+1];
+			NativeEncrypt(ciphertext, key);
+			ib2.put(ciphertext);
+		}
+		
+		// Return the full ciphertext.
+		ByteBuffer bb2 = ByteBuffer.allocate(fullCiphertext.length * 4);
+		IntBuffer intBuffer = bb2.asIntBuffer();
+		intBuffer.put(ciphertext);
+		return bb2.array();
 	}
 
 	public byte[] Decrypt(byte[] input)
