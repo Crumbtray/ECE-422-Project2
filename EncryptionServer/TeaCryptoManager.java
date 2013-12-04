@@ -61,8 +61,10 @@ public class TeaCryptoManager {
 		}
 		
 		// Return the full ciphertext.
+		System.out.println("Full cipher text length: " + fullCiphertext.length);
 		ByteBuffer bb2 = ByteBuffer.allocate(fullCiphertext.length * 4);
 		IntBuffer intBuffer = bb2.asIntBuffer();
+		System.out.println("Character Buffer length: " + bb2.capacity());
 		intBuffer.put(fullCiphertext);
 		return bb2.array();
 	}
