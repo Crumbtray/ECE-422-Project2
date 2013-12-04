@@ -42,7 +42,16 @@ public class TeaCryptoManager {
 		
 		// Cycling two Ints in the array, encipher.
 		int[] ciphertext = new int[2];
-		int[] fullCiphertext = new int[buf.length];
+		int[] fullCiphertext;
+		if(buf.length % 2 > 0)
+		{
+			fullCiphertext = new int[buf.length + 1];
+		}
+		else
+		{
+			fullCiphertext = new int[buf.length];
+		}
+		
 		IntBuffer ib2 = IntBuffer.wrap(fullCiphertext);
 		
 		for (int i = 0; i < buf.length; i+=2)
