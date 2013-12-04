@@ -64,7 +64,8 @@ public class TeaCryptoManager {
 	{
 		//Convert the byte array into an int array.
 		IntBuffer intBuf = ByteBuffer.wrap(input).asIntBuffer();
-		int[] cipherInt = intBuf.array();
+		int[] cipherInt = new int[intBuf.remaining()];
+		intBuf.get(cipherInt);
 		
 		int[] plainTextFrags = new int[2];
 		int[] plainText = new int[cipherInt.length];
