@@ -1,10 +1,10 @@
 public class test {
 	public static void main(String[] args)
 	{
-		String key = "chocolate";
+		String key = "cream";
 
 		TeaCryptoManager tm = new TeaCryptoManager(key.getBytes());
-		byte[] cipherText = tm.Encrypt("banana".getBytes());
+		byte[] cipherText = tm.Encrypt("strawberry".getBytes());
 		
 		for(int i = 0; i < cipherText.length; i++)
 		{
@@ -12,6 +12,10 @@ public class test {
 		}
 		
 		byte[] original = tm.Decrypt(cipherText);
-		System.out.println(new String(original));
+		String newString = new String(original);
+		System.out.println(newString);
+		System.out.println("Are they equal? " + newString.equals("strawberry"));
+		System.out.println("Decrypted Size: " + newString.length());
+		System.out.println("Original Size: " + "strawberry".length());
 	}
 }
