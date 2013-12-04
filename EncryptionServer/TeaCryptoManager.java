@@ -63,7 +63,7 @@ public class TeaCryptoManager {
 		// Return the full ciphertext.
 		ByteBuffer bb2 = ByteBuffer.allocate(fullCiphertext.length * 4);
 		IntBuffer intBuffer = bb2.asIntBuffer();
-		intBuffer.put(ciphertext);
+		intBuffer.put(fullCiphertext);
 		return bb2.array();
 	}
 
