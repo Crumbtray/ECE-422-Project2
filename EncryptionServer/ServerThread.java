@@ -58,6 +58,7 @@ public class ServerThread extends Thread {
 				{
 					FileServer fileServer = new FileServer(cryptoManager);
 					String decryptedInput = new String(cryptoManager.Decrypt(inputRequest.buffer));
+					System.out.println("Processing Input: " + decryptedInput);
 					outputObject = fileServer.processInput(decryptedInput);
 					oos.writeObject(outputObject);
 					oos.flush();
