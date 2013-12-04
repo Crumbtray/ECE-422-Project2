@@ -24,6 +24,11 @@ public class TeaCryptoManager {
 		}
 	}
 	
+	public byte[] Encrypt(String input)
+	{
+		return Encrypt(input.getBytes());
+	}
+	
 	public byte[] Encrypt(byte[] input)
 	{
 		// Pad input into array P, a multiple of 4
@@ -104,6 +109,12 @@ public class TeaCryptoManager {
 		ib2.put(plainText);
 		return bb.array();
 		
+	}
+	
+	public String DecryptToString(byte[] input)
+	{
+		String plainText = new String(Decrypt(input));
+		return plainText.trim();
 	}
 
 	public native void NativeEncrypt(int[] v, int[] k);

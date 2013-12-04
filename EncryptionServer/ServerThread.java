@@ -83,7 +83,7 @@ public class ServerThread extends Thread {
 		for(String value : this.Users.values())
 		{
 			TeaCryptoManager decryptor = new TeaCryptoManager(value.getBytes());
-			String username = new String(decryptor.Decrypt(buffer));
+			String username = decryptor.DecryptToString(buffer);
 			System.out.println("Username: " + username);
 			String possiblePassword = this.Users.get(username);
 			System.out.println("Value: " + value + ", " + possiblePassword);

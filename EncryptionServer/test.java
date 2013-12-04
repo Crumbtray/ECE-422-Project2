@@ -11,8 +11,7 @@ public class test {
 			System.out.println(cipherText[i]);
 		}
 		
-		byte[] original = tm.Decrypt(cipherText);
-		String newString = new String(original);
+		String newString = tm.DecryptToString(cipherText);
 		System.out.println(newString);
 		System.out.println("Are they equal? " + newString.equals("strawberry"));
 		System.out.println("Decrypted Size: " + newString.length());

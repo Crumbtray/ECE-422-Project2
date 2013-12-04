@@ -33,7 +33,7 @@ public class Client {
 			while((fromServer = (Response) objectInputStream.readObject()) != null)
 			{
 				// Decrypt all messages from the server
-				String decryptedMessage = new String(cryptoManager.Decrypt(fromServer.getMessage()));
+				String decryptedMessage = cryptoManager.DecryptToString(fromServer.getMessage());
 				if(decryptedMessage.equals("Exit"))
 				{
 					break;
