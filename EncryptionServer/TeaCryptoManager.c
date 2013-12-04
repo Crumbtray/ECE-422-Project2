@@ -24,8 +24,8 @@ JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeEncrypt(JNIEnv *env, jobject 
     }                                              /* end cycle */
     v[0]=v0; v[1]=v1;
 
-    (*env)->ReleaseIntArrayElements(env, values, v, NULL);
-    (*env)->ReleaseIntArrayElements(env, keys, k, NULL);
+    (*env)->ReleaseIntArrayElements(env, values, v, 0);
+    (*env)->ReleaseIntArrayElements(env, keys, k, 0);
 }
 
 /*
