@@ -7,6 +7,7 @@ public class TeaCryptoManager {
 	
 	public TeaCryptoManager(byte[] key)
 	{
+		System.load("TeaCryptoManager");
 		// Convert the key into a 128-bit integer key.
 		this.key = new int[4];
 		try {
@@ -20,7 +21,7 @@ public class TeaCryptoManager {
 		catch (NoSuchAlgorithmException e)
 		{
 			System.out.println(e.getLocalizedMessage());
-		}	
+		}
 	}
 	
 	public byte[] Encrypt(byte[] input)
