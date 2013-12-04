@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <jni.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "TeaCryptoManager.h"
 
 /*
@@ -8,7 +9,7 @@
  * Method:    NativeEncrypt
  * Signature: ([I[I)V
  */
-JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeEncrypt(JNIEnv *, jobject, jintArray values, jintArray keys)
+JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeEncrypt(JNIEnv *env, jobject thisObj, jintArray values, jintArray keys)
 {
 	jint *v = env->GetIntArrayElements(values, NULL);
 	jint *k = env->GetIntArrayElements(keys, NULL);
@@ -29,7 +30,7 @@ JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeEncrypt(JNIEnv *, jobject, ji
  * Method:    NativeDecrypt
  * Signature: ([I[I)V
  */
-JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeDecrypt(JNIEnv *, jobject, jintArray values, jintArray keys)
+JNIEXPORT void JNICALL Java_TeaCryptoManager_NativeDecrypt(JNIEnv *env, jobject thisObj, jintArray values, jintArray keys)
 {
 
 }
