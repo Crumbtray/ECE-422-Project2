@@ -59,7 +59,6 @@ public class Client {
 					String[] lines = decryptedMessage.split("\n");
 					String filename = lines[0];
 					File file = new File(filename);
-					System.out.println(file.getAbsolutePath());
 					PrintWriter writer = new PrintWriter(file);
 					for (int i = 1; i < lines.length; i++)
 					{
