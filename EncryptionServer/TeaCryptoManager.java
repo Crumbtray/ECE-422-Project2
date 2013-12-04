@@ -62,7 +62,29 @@ public class TeaCryptoManager {
 
 	public byte[] Decrypt(byte[] input)
 	{
-		return input;
+		//Convert the byte array into an int array.
+		IntBuffer intBuf = ByteBuffer.wrap(input).asIntBuffer();
+		int[] cipherInt = intBuf.array();
+		
+		int[] plainTextFrags = new int[2];
+		int[] plainText = new int[cipherInt.length];
+		IntBuffer ib = IntBuffer.wrap(plainText);
+		// For every two integers in the array, we decrypt them.
+		// Then we place it into a giant plaintext int array.
+		for(int i = 0; i < cipherInt.length; i+=2)
+		{
+			plainTextFrags[0] = cipherInt[i];
+			plainTextFrags[1] = cipherInt[i+1];
+			NativeDecrypt(plainTextFrags, key);
+			ib.put(plainTextFrags);
+		}
+		
+		// Convert the plain text back into a character array and return.
+		ByteBuffer bb = ByteBuffer.allocate(plainText.length * 4);
+		IntBuffer ib2 = bb.asIntBuffer();
+		ib2.put(plainText);
+		return bb.array();
+		
 	}
 
 	public native void NativeEncrypt(int[] v, int[] k);
