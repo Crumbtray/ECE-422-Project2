@@ -14,7 +14,11 @@ public class FileServer {
 		String returnString = input;
 		
 		String[] commands = input.split(" ");
-		
+		System.out.println("FileServer sees:");
+		for (int i = 0; i < commands.length; i++)
+		{
+			System.out.println(commands[i]);
+		}
 		if(commands[0].toLowerCase().equals("exit"))
 		{
 			returnString = "Exit";
@@ -28,8 +32,7 @@ public class FileServer {
 			else
 			{
 				return getFile(commands[1]);
-			}
-			
+			}	
 		}
 		else
 		{
