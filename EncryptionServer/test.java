@@ -1,10 +1,10 @@
 public class test {
 	public static void main(String[] args)
 	{
-		String key = "Blagg";
+		String key = "chocolate";
 
 		TeaCryptoManager tm = new TeaCryptoManager(key.getBytes());
-		byte[] cipherText = tm.Encrypt("Hi".getBytes());
+		byte[] cipherText = tm.Encrypt("banana".getBytes());
 		
 		for(int i = 0; i < cipherText.length; i++)
 		{

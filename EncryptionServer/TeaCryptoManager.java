@@ -48,7 +48,14 @@ public class TeaCryptoManager {
 		for (int i = 0; i < buf.length; i+=2)
 		{
 			ciphertext[0] = buf[i];
-			ciphertext[1] = buf[i+1];
+			if((i+1) < buf.length)
+			{
+				ciphertext[1] = buf[i+1];
+			}
+			else
+			{
+				ciphertext[1] = 0;
+			}
 			NativeEncrypt(ciphertext, key);
 			ib2.put(ciphertext);
 		}

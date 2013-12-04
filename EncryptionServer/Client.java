@@ -25,7 +25,8 @@ public class Client {
 			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 			Response fromServer;
 			String fromUser;
-
+			
+			System.out.println("Trying to encrypt initial message....");
 			byte[] encryptedInitialMessage = cryptoManager.Encrypt(userName.getBytes());
 			oos.writeObject(new Request(encryptedInitialMessage));
 			
@@ -83,9 +84,17 @@ public class Client {
 			System.out.println("Server closed the connection.");
 			System.exit(1);
 		}
-		catch (Exception e)
+		catch(SocketException e)
 		{
-			System.out.println(e);
+			System.out.println(e.getMessage());
+		}
+		catch(IOException ioe)
+		{
+			System.out.println(ioe);
+		}
+		catch(ClassNotFoundException cnfe)
+		{
+			System.out.println(cnfe);
 		}
 	}
 }

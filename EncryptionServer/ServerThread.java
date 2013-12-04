@@ -19,6 +19,7 @@ public class ServerThread extends Thread {
 		this.Users = users;
 		this.socket = socket;
 		this.state = ServerState.AUTH;
+		System.out.println("Server Thread Created.");
 	}
 	
 	public void run() {
@@ -30,12 +31,15 @@ public class ServerThread extends Thread {
 			Request inputRequest;
 			Response outputObject;
 			
+			System.out.println("Accepting Input...");
 			while((inputRequest = (Request) ois.readObject()) != null)
 			{
+				System.out.println("Received a message from the client.");
 				if(this.state == ServerState.AUTH)
 				{
 					if(tryAuthorize(inputRequest.buffer))
 					{
+						System.out.println("Authorizing...");
 						this.state = ServerState.SERVE;
 						String response = "OK";
 						outputObject = new Response(cryptoManager.Encrypt(response.getBytes()));
